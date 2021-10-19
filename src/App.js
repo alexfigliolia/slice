@@ -1,25 +1,21 @@
-import logo from './logo.svg';
-import './App.css';
+import { Fragment, lazy, Suspense } from 'react';
+import { Switch, Route } from 'react-router-dom';
+import FullScreenLoader from 'Components/FullScreenLoader';
+import { useScreen } from 'Hooks/Screen';
 
-function App() {
+const Home = lazy(() => import('Pages/Home'));
+
+export default function App() {
+  useScreen();
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Fragment>
+      <Suspense fallback={<FullScreenLoader />}>
+        <Switch>
+          <Route path="/">
+            <Home />
+          </Route>
+        </Switch>
+      </Suspense>
+    </Fragment>
   );
 }
-
-export default App;

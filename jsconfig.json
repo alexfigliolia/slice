@@ -1,0 +1,43 @@
+{
+  "compilerOptions": {
+    "baseUrl": "./src",
+    "paths": {
+      "Root/*": [
+        "./*"
+      ],
+      "Actions/*": [
+        "./Actions/*"
+      ],
+      "Reducers/*": [
+        "./Reducers/*"
+      ],
+      "Store/*": [
+        "./Store/*"
+      ],
+      "Modules/*": [
+        "./Modules/*"
+      ],
+      "Hooks/*": [
+        "./Hooks/*"
+      ],
+      "Pages/*": [
+        "./Pages/*"
+      ],
+      "Components/*": [
+        "./Components/*"
+      ],
+      "Styles/*": [
+        "./Styles/*"
+      ],
+      "Icons/*": [
+        "./Images/*"
+      ],
+      "Images/*": [
+        "./Images/*"
+      ]
+    }
+  },
+  "include": [
+    "src/**/*"
+  ]
+}

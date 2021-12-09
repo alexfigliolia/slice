@@ -1,20 +1,18 @@
 
 import 'Styles/index.scss';
+import 'focus-visible';
 import React from 'react';
 import { render } from 'react-dom';
 import { Provider } from 'react-redux';
-import { BrowserRouter } from 'react-router-dom';
 import Store from './Store';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 
 render(
   <Provider store={Store}>
-    <BrowserRouter>
-      <React.StrictMode>
-        <App />
-      </React.StrictMode>
-    </BrowserRouter>
+    <React.StrictMode>
+      <App />
+    </React.StrictMode>
   </Provider>,
   document.getElementById('root')
 );

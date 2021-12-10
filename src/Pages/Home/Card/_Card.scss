@@ -36,5 +36,8 @@
       color: darken($BLUE, 15);
       font-weight: 700;
     }
+    &.no-cap > div:last-of-type {
+      color: rgb(247, 45, 45);
+    }
   }
 }

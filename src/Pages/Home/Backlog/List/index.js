@@ -42,7 +42,7 @@ class List extends Component {
 }
 
 const mSTP = ({ Backlog }) => {
-  return { tasks: Backlog.tasks };
+  return { tasks: Backlog.tasks.filter(t => t.assignee === '') };
 }
 
 export default connect(mSTP)(List);

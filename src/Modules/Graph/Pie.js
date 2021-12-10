@@ -61,7 +61,7 @@ export default class Pie {
     this.arcs.append('text')
       .attr('transform', d => `translate(${this.arc.centroid(d)})`)
       .attr('font-family', 'sans-serif')
-      .attr('font-size', this.width / 35)
+      .attr('font-size', this.width / 25)
       .attr('text-anchor', 'middle')
       .attr('fill', '#fff')
       .call(text => text.append('tspan')
@@ -106,12 +106,17 @@ export default class Pie {
       this.svg.attr('width', width + paddingX).attr('height', height + paddingY);
       this.radius = Math.min(width, height) / 2;
       this.group.attr('transform', 'translate(' + (width + paddingX) / 2 + ',' + (height + paddingY) / 2 + ')');
-      this.arc = D3.arc().innerRadius(width / 5).outerRadius(this.radius);
+      this.arc = D3.arc().innerRadius(width / 7).outerRadius(this.radius);
       this.svg.selectAll('path').attr('d', this.arc);
       this.arcs.selectAll('text')
         .attr('transform', d => `translate(${this.arc.centroid(d)})`)
-        .attr('font-size', this.width / 35)
-        .call(text => text.append('tspan').attr('y', '-0.4em'))
+        .attr('font-family', 'sans-serif')
+        .attr('font-size', this.width / 25)
+        .attr('text-anchor', 'middle')
+        .attr('fill', '#fff')
+        .call(text => text.append('tspan')
+          .attr('y', '-0.4em')
+        )
     }
   }
 }

@@ -1,4 +1,5 @@
 import Update from 'immutability-helper';
+import { getTaskByID } from 'Modules/Helpers';
 
 const initialState = {
   tasks: [
@@ -88,7 +89,7 @@ const initialState = {
   cloneY: 0,
   cloneOffset: 0,
   cloneWidth: 0,
-  activeTaskIndex: 0,
+  activeTaskID: 0,
 }
 
 const Backlog = (state = initialState, action) => {
@@ -102,19 +103,31 @@ const Backlog = (state = initialState, action) => {
       return Object.assign({}, state, { cloneX: x, cloneY: y });
     }
     case 'SET_DRAGGABLE': {
-      const { width, offsetX, taskIndex } = action;
+      const { width, offsetX, taskID } = action;
       return Object.assign({}, state, {
         cloneWidth: width,
         draggable: true,
         cloneOffset: offsetX,
-        activeTaskIndex: taskIndex,
+        activeTaskID: taskID,
       });
     }
     case 'END_DRAG':
       return Object.assign({}, state, { draggable: false, clone: {} });
     case 'UPDATE_ACTIVE_TASK': {
-      const { tasks, activeTaskIndex } = state;
-      return Object.assign({}, state, { tasks: Update(tasks, { [activeTaskIndex]: { $set: action.task } }) });
+      const { tasks, activeTaskID } = state;
+      const idx = getTaskByID(tasks, activeTaskID);
+      if (idx === null) return state;
+      return Object.assign({}, state, { tasks: Update(tasks, { [idx]: { $set: action.task } }) });
+    }
+    case 'UNASSIGN_ACTIVE_TASK': {
+      const { tasks, activeTaskID } = state;
+      const idx = getTaskByID(tasks, activeTaskID);
+      if (idx === null) return state;
+      return Object.assign(
+        {},
+        state,
+        { tasks: Update(tasks, { [idx]: { assignee: { $set: '' } } }) }
+      );
     }
     default:
       return state;

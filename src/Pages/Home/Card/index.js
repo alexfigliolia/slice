@@ -29,7 +29,7 @@ class Card extends Component {
           <div>Total Capacity:</div>
           <div>{capacity} points</div>
         </div>
-        <div className='hc-cap'>
+        <div className={`hc-cap${remaining === 0 ? ' no-cap' : ''}`}>
           <div>Remaining Capacity:</div>
           <div>{remaining} points</div>
         </div>

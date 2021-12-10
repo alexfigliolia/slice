@@ -5,27 +5,17 @@ const initialState = {
     1: {
       id: 1,
       name: 'Alex Figliolia',
-      capacity: 20
+      capacity: 8
     },
     2: {
       id: 2,
-      name: 'Thomas Jefferson',
-      capacity: 14
+      name: 'Belinda Rose',
+      capacity: 6
     },
     3: {
       id: 3,
-      name: 'Belinda Rose',
-      capacity: 20
-    },
-    4: {
-      id: 4,
-      name: 'Alexander Hamilton',
-      capacity: 17
-    },
-    5: {
-      id: 5,
       name: 'Olga Gabris',
-      capacity: 20
+      capacity: 8
     },
   },
   cardActive: false,

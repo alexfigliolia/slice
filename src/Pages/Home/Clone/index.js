@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { setDragLocation, endDrag, attemptAddTask } from 'Actions/Backlog';
+import { setDragLocation, endDrag, attemptAddTask, unassignTask } from 'Actions/Backlog';
 import Task from 'Components/Task';
+import { getTaskByID } from 'Modules/Helpers';
 import './_Clone.scss';
 
 class Clone extends Component {
@@ -39,15 +40,24 @@ class Clone extends Component {
     }
   }
 
+  componentWillUnmount() {
+    document.removeEventListener('mousemove', this.dragMove);
+    document.removeEventListener('mouseup', this.drop);
+  }
+
   dragMove(e) {
     const { pageX, pageY } = e;
     this.props.setDragLocation(pageX, pageY);
   }
 
   drop(e) {
-    const id = e.target.classList.value;
-    const { attemptAddTask, endDrag } = this.props;
-    attemptAddTask(id);
+    const { attemptAddTask, endDrag, unassignTask } = this.props;
+    const { target } = e;
+    const closestTable = target.closest('table');
+    if (!!closestTable) {
+      unassignTask();
+    }
+    attemptAddTask(target.classList.value);
     endDrag();
   }
 
@@ -90,8 +100,13 @@ class Clone extends Component {
 }
 
 const mSTP = ({ Backlog }) => {
-  const { tasks, cloneX, cloneY, cloneWidth, draggable, cloneOffset, activeTaskIndex } = Backlog;
-  return { ...(tasks[activeTaskIndex] || {}), cloneX, cloneY, cloneWidth, draggable, cloneOffset };
+  const { tasks, cloneX, cloneY, cloneWidth, draggable, cloneOffset, activeTaskID } = Backlog;
+  let task = {};
+  const idx = getTaskByID(tasks, activeTaskID);
+  if (idx !== null) {
+    task = tasks[idx];
+  }
+  return { ...task, cloneX, cloneY, cloneWidth, draggable, cloneOffset };
 }
 
-export default connect(mSTP, { setDragLocation, endDrag, attemptAddTask })(Clone);
+export default connect(mSTP, { setDragLocation, endDrag, attemptAddTask, unassignTask })(Clone);

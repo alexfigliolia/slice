@@ -2,20 +2,50 @@
 
 .viz-member {
   width: 100%;
-  @include center;
-  justify-content: space-between;
-  margin: 15px 0;
-  color: $BLACK;
-  & > .viz-name {
+  & > .vm-info {
+    width: 100%;
     @include center;
-    & > .viz-color {
-      height: 22.5px;
-      width: 22.5px;
-      margin-right: 10px;
+    justify-content: space-between;
+    margin: 15px 0;
+    color: $BLACK;
+    & > .viz-name {
+      @include center;
+      & > .viz-color {
+        height: 22.5px;
+        width: 22.5px;
+        margin-right: 10px;
+      }
+    }
+    & > .viz-cap {
+      font-size: 1.1em;
+      font-weight: 600;
     }
   }
-  & > .viz-cap {
-    font-size: 1.1em;
-    font-weight: 600;
+  & > .vm-tasks {
+    & > .backlog-item.active-task {
+      background-color: #f7f7f7;
+      font-size: 0.7em;
+      width: 100%;
+      @include center;
+      justify-content: space-between;
+      @media #{$mq-670} {
+        font-size: 0.85em;
+      }
+      @media #{$mq-890} {
+        font-size: 0.7em;
+      }
+      @media #{$mq-1350} {
+        font-size: 0.85em;
+      }
+      & > div {
+        margin: 0 2.5px;
+      }
+      & > .type {
+        margin-left: 5px;
+      }
+      & > .points > input {
+        max-width: 30px;
+      }
+    }
   }
 }

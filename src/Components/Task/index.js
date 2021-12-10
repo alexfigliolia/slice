@@ -77,7 +77,7 @@ class Task extends Component {
 
   listen(e) {
     const {
-      index,
+      id,
       setDraggable,
       setDragLocation
     } = this.props;
@@ -85,13 +85,18 @@ class Task extends Component {
     if (target.tagName === 'INPUT' || target.tagName === 'BUTTON') {
       return;
     }
-    const tableRow = target.closest('tr');
+    const tableRow = target.closest('.backlog-item')
+    // if(Tag === 'tr') {
+    //   tableRow = target.closest('tr');
+    // } else {
+    //   tableRow = target.closest('')
+    // }
     if (!!tableRow) {
       setDragLocation(pageX, pageY);
       setDraggable(
         tableRow.getBoundingClientRect().width,
         nativeEvent.offsetX,
-        index
+        id
       )
     }
   }

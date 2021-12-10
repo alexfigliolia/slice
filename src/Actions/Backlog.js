@@ -1,3 +1,5 @@
+import { getTaskByID } from "Root/Modules/Helpers";
+
 export const editTaskPoints = (index, points) => {
   return { type: 'EDIT_TASK_POINTS', index, points };
 }
@@ -6,8 +8,8 @@ export const setDragLocation = (x, y) => {
   return { type: 'SET_DRAGGABLE_TASK_LOCATION', x, y };
 }
 
-export const setDraggable = (width = 0, offsetX = 0, taskIndex) => {
-  return { type: 'SET_DRAGGABLE', width, offsetX, taskIndex };
+export const setDraggable = (width = 0, offsetX = 0, taskID) => {
+  return { type: 'SET_DRAGGABLE', width, offsetX, taskID };
 }
 
 export const endDrag = () => {
@@ -23,8 +25,12 @@ export const attemptAddTask = (id) => (dispatch, getState) => {
   if (!(id in Team.members)) {
     return;
   }
-  const { tasks, activeTaskIndex } = Backlog;
-  const activeTask = tasks[activeTaskIndex];
+  const { tasks, activeTaskID } = Backlog;
+  const idx = getTaskByID(tasks, activeTaskID);
+  if (idx === null) {
+    return;
+  }
+  const activeTask = tasks[idx];
   const { name, capacity } = Team.members[id];
   const capacityUsed = tasks.filter(t => t.assignee === name).reduce((acc, next) => acc + next.points, 0);
   if (capacity - (capacityUsed + activeTask.points) < 0) {
@@ -35,4 +41,8 @@ export const attemptAddTask = (id) => (dispatch, getState) => {
     assignee: name
   };
   dispatch({ type: 'UPDATE_ACTIVE_TASK', task });
+}
+
+export const unassignTask = () => {
+  return { type: 'UNASSIGN_ACTIVE_TASK' };
 }

@@ -2,7 +2,7 @@ import * as D3 from 'd3';
 import Store from 'Store';
 import { onShardHover, onShardLeave } from 'Actions/Team';
 
-const { dispatch } = Store;
+const { dispatch, getState } = Store;
 
 export default class Pie {
 
@@ -54,6 +54,7 @@ export default class Pie {
       .attr('stroke', '#fff')
       .attr('stroke-width', 3)
       .attr('fill', (d, i) => this.colors(i))
+      .attr('class', (d, i) => this.data[i]?.id)
       .attr('d', this.arc)
       .on('mouseenter mousemove', this.moveCard)
       .on('mouseleave', this.disableCard);
@@ -69,11 +70,13 @@ export default class Pie {
   }
 
   static moveCard(e) {
-    const { pageX, pageY, srcElement } = e;
-    dispatch(onShardHover(pageX + 40, pageY, srcElement.__data__.data));
+    if (!getState().Backlog.draggable) {
+      const { pageX, pageY, srcElement } = e;
+      dispatch(onShardHover(pageX + 40, pageY, srcElement.__data__.data));
+    }
   }
 
-  static disableCard(e) {
+  static disableCard() {
     dispatch(onShardLeave());
   }
 

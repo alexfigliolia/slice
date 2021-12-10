@@ -1,6 +1,6 @@
 import { Component } from 'react';
 import { connect } from 'react-redux';
-import { editTaskPoints } from 'Actions/Backlog';
+import { editTaskPoints, setDraggable, setDragLocation } from 'Actions/Backlog';
 import TaskIcon from 'Icons/task.png';
 import Bug from 'Icons/bug.png';
 import Story from 'Icons/story.png';
@@ -12,26 +12,31 @@ import './_Task.scss';
 class Task extends Component {
   constructor(props) {
     super(props);
+    this.cloned = false;
     this.blur = this.blur.bind(this);
+    this.listen = this.listen.bind(this);
     this.updatePoints = this.updatePoints.bind(this);
   }
 
   static defaultProps = {
+    Tag: 'tr',
+    ChildTag: 'td',
     id: '',
     type: '',
     summary: '',
     priority: 'LOW',
     assignee: '',
     points: 0,
+    style: {}
   }
 
-  shouldComponentUpdate({ id, points }) {
-    console.log(points);
-    const curProps = this.props;
-    if (id !== curProps.id) return true;
-    else if (points !== curProps.points) return true;
-    return false;
-  }
+  // shouldComponentUpdate({ id, points }) {
+  //   console.log(points);
+  //   const curProps = this.props;
+  //   if (id !== curProps.id) return true;
+  //   else if (points !== curProps.points) return true;
+  //   return false;
+  // }
 
   enumType(type) {
     switch (type) {
@@ -70,25 +75,49 @@ class Task extends Component {
     }
   }
 
+  listen(e) {
+    const {
+      index,
+      setDraggable,
+      setDragLocation
+    } = this.props;
+    const { target, nativeEvent, pageX, pageY } = e;
+    if (target.tagName === 'INPUT' || target.tagName === 'BUTTON') {
+      return;
+    }
+    const tableRow = target.closest('tr');
+    if (!!tableRow) {
+      setDragLocation(pageX, pageY);
+      setDraggable(
+        tableRow.getBoundingClientRect().width,
+        nativeEvent.offsetX,
+        index
+      )
+    }
+  }
+
   render() {
-    const { id, type, summary, priority, assignee, points } = this.props;
+    const { Tag, ChildTag, id, type, summary, priority, assignee, points, className, style } = this.props;
     return (
-      <tr className='backlog-item'>
-        <td className='type'>{this.enumType(type)}</td>
-        <td>{id}</td>
-        <td className='priority'>{this.enumPriority(priority)}</td>
-        <td>{summary}</td>
-        <td className='assignee'>{assignee}</td>
-        <td className='points'>
+      <Tag
+        className={`backlog-item${className ? ` ${className}` : ''}`}
+        onMouseDown={this.listen}
+        style={style}>
+        <ChildTag className='type'>{this.enumType(type)}</ChildTag>
+        <ChildTag>{id}</ChildTag>
+        <ChildTag className='priority'>{this.enumPriority(priority)}</ChildTag>
+        <ChildTag>{summary}</ChildTag>
+        <ChildTag className='assignee'>{assignee}</ChildTag>
+        <ChildTag className='points'>
           <input
             type='number'
             value={points}
             onBlur={this.blur}
             onChange={this.updatePoints} />
-        </td>
-      </tr>
+        </ChildTag>
+      </Tag>
     )
   }
 }
 
-export default connect(null, { editTaskPoints })(Task);
+export default connect(null, { editTaskPoints, setDraggable, setDragLocation })(Task);

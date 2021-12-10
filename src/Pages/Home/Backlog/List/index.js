@@ -1,6 +1,6 @@
 import { Component } from 'react';
 import { connect } from 'react-redux';
-import Task from './Task';
+import Task from 'Components/Task';
 import './_List.scss';
 
 class List extends Component {

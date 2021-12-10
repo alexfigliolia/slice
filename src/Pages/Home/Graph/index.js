@@ -83,9 +83,11 @@ class Graph extends Component {
   }
 }
 
-const mSTP = ({ Team }) => {
-  const { members, assigned = [] } = Team;
-  return { members, totalAssigned: assigned?.length || 0 };
+const mSTP = ({ Team, Backlog }) => {
+  return {
+    members: Team.members,
+    totalAssigned: Backlog.tasks.filter(t => t.assignee !== '').length
+  };
 }
 
 export default connect(mSTP)(Graph);

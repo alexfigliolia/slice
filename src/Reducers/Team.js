@@ -32,8 +32,7 @@ const initialState = {
   cardData: {},
   mouseX: 0,
   mouseY: 0,
-  assignments: {},
-  assigned: [],
+  assigned: []
 }
 
 const Team = (state = initialState, action) => {
@@ -44,10 +43,10 @@ const Team = (state = initialState, action) => {
     }
     case 'ON_SHARD_HOVER': {
       const { x, y, data } = action;
-      return Object.assign({ cardActive: true, mouseX: x, mouseY: y, cardData: data });
+      return Object.assign({}, state, { cardActive: true, mouseX: x, mouseY: y, cardData: data });
     }
     case 'ON_SHARD_LEAVE':
-      return Object.assign({ cardActive: false })
+      return Object.assign({}, state, { cardActive: false });
     default:
       return state;
   }

@@ -27,21 +27,22 @@ class Card extends Component {
         <h4>{name}</h4>
         <div className='hc-cap'>
           <div>Total Capacity:</div>
-          <div>{capacity}</div>
+          <div>{capacity} points</div>
         </div>
         <div className='hc-cap'>
           <div>Remaining Capacity:</div>
-          <div>{remaining}</div>
+          <div>{remaining} points</div>
         </div>
       </div>
     )
   }
 }
 
-const mSTP = ({ Team }) => {
-  const { mouseX, mouseY, cardActive, cardData, assignments } = Team;
-  const { id, capacity } = (cardData || {});
-  const capacityUsed = (assignments?.[id] ?? []).reduce((acc, next) => acc + next.points, 0);
+const mSTP = ({ Team, Backlog }) => {
+  const { mouseX, mouseY, cardActive, cardData } = Team;
+  const { tasks } = Backlog;
+  const { capacity = 0, name } = (cardData || {});
+  const capacityUsed = tasks.filter(t => t.assignee === name).reduce((acc, next) => acc + next.points, 0);
   return { mouseX, mouseY, cardActive, cardData: cardData || {}, remaining: capacity - capacityUsed };
 }
 

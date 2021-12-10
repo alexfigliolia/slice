@@ -7,8 +7,16 @@
   margin-top: 10px;
   & > svg {
     filter: drop-shadow(0px 2.5px 5px rgba(#000, 0.2));
-    & .arc > text {
-      pointer-events: none;
+    & .arc {
+      & > text {
+        pointer-events: none;
+      }
+      & > path {
+        transition-duration: 0.3s;
+        &:hover {
+          transform: scale(1.05);
+        }
+      }
     }
   }
   & > .graph-meta {

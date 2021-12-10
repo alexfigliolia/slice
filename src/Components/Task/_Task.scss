@@ -10,6 +10,9 @@
   & > td {
     padding: 7.5px;
     font-weight: 500;
+    // &:not(.points) {
+    //   pointer-events: none;
+    // }
   }
   & > .type > img,
   & > .priority > img {

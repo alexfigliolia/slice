@@ -1,4 +1,4 @@
-## Slice
+## Splice
 
 A new visualization for sprint planning
 

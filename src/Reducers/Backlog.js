@@ -83,7 +83,12 @@ const initialState = {
       points: Math.floor(Math.random() * (5 - 1) + 1)
     },
   ],
-  sprint: []
+  draggable: false,
+  cloneX: 0,
+  cloneY: 0,
+  cloneOffset: 0,
+  cloneWidth: 0,
+  activeTaskIndex: 0,
 }
 
 const Backlog = (state = initialState, action) => {
@@ -92,9 +97,24 @@ const Backlog = (state = initialState, action) => {
       const { index, points } = action;
       return Object.assign({}, state, { tasks: Update(state.tasks, { [index]: { points: { $set: Math.max(0, points) } } }) });
     }
-    case 'EDIT_SPRINT_TASK_POINTS': {
-      const { index, points } = action;
-      return Object.assign({}, state, { sprint: Update(state.sprint, { [index]: { points: { $set: Math.max(0, points) } } }) });
+    case 'SET_DRAGGABLE_TASK_LOCATION': {
+      const { x, y } = action;
+      return Object.assign({}, state, { cloneX: x, cloneY: y });
+    }
+    case 'SET_DRAGGABLE': {
+      const { width, offsetX, taskIndex } = action;
+      return Object.assign({}, state, {
+        cloneWidth: width,
+        draggable: true,
+        cloneOffset: offsetX,
+        activeTaskIndex: taskIndex,
+      });
+    }
+    case 'END_DRAG':
+      return Object.assign({}, state, { draggable: false, clone: {} });
+    case 'UPDATE_ACTIVE_TASK': {
+      const { tasks, activeTaskIndex } = state;
+      return Object.assign({}, state, { tasks: Update(tasks, { [activeTaskIndex]: { $set: action.task } }) });
     }
     default:
       return state;

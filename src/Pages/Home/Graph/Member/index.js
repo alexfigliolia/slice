@@ -2,14 +2,14 @@ import { Component } from 'react';
 import { connect } from 'react-redux';
 import './_Member.scss';
 
-export default class Member extends Component {
+class Member extends Component {
 
-  shouldComponentUpdate() {
-    return false;
+  shouldComponentUpdate({ points }) {
+    return points !== this.props.points;
   }
 
   render() {
-    const { name, capacity, color } = this.props;
+    const { name, points, color } = this.props;
     return (
       <div className='viz-member'>
         <div className='viz-name'>
@@ -18,8 +18,14 @@ export default class Member extends Component {
             style={{ backgroundColor: color }} />
           {name}
         </div>
-        <div className='viz-cap'>{capacity} points</div>
+        <div className='viz-cap'>{points} points</div>
       </div>
     )
   }
 }
+
+const mSTP = ({ Backlog }, { name }) => {
+  return { points: Backlog.tasks.filter(t => t.assignee === name).reduce((acc, cur) => acc + cur.points, 0) };
+}
+
+export default connect(mSTP)(Member);

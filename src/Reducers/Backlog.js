@@ -7,7 +7,7 @@ const initialState = {
       type: 'TASK',
       summary: 'Create some dialogue for the video',
       priority: 'HIGH',
-      assignee: 'Olga Gabris',
+      assignee: '',
       points: Math.floor(Math.random() * (5 - 1) + 1)
     },
     {
@@ -15,7 +15,7 @@ const initialState = {
       type: 'TASK',
       summary: 'Create the video',
       priority: 'HIGH',
-      assignee: 'Olga Gabris',
+      assignee: '',
       points: Math.floor(Math.random() * (5 - 1) + 1)
     },
     {
@@ -23,7 +23,7 @@ const initialState = {
       type: 'STORY',
       summary: 'Put together some documentation for the project',
       priority: 'MEDIUM',
-      assignee: 'Olga Gabris',
+      assignee: '',
       points: Math.floor(Math.random() * (5 - 1) + 1)
     },
     {
@@ -31,7 +31,7 @@ const initialState = {
       type: 'TASK',
       summary: 'Sync with teammembers',
       priority: 'LOW',
-      assignee: 'Olga Gabris',
+      assignee: '',
       points: Math.floor(Math.random() * (5 - 1) + 1)
     },
     {
@@ -39,7 +39,7 @@ const initialState = {
       type: 'STORY',
       summary: 'Create a pitch deck',
       priority: 'HIGH',
-      assignee: 'Belinda Rose',
+      assignee: '',
       points: Math.floor(Math.random() * (5 - 1) + 1)
     },
     {
@@ -47,7 +47,7 @@ const initialState = {
       type: 'STORY',
       summary: 'Create a pitch deck',
       priority: 'HIGH',
-      assignee: 'Belinda Rose',
+      assignee: '',
       points: Math.floor(Math.random() * (5 - 1) + 1)
     },
     {
@@ -55,7 +55,7 @@ const initialState = {
       type: 'TASK',
       summary: 'Get a prototype out for shipit',
       priority: 'HIGH',
-      assignee: 'Alex Figliolia',
+      assignee: '',
       points: Math.floor(Math.random() * (5 - 1) + 1)
     },
     {
@@ -63,7 +63,7 @@ const initialState = {
       type: 'BUG',
       summary: 'Fix the backlog table',
       priority: 'MEDIUM',
-      assignee: 'Alex Figliolia',
+      assignee: '',
       points: Math.floor(Math.random() * (5 - 1) + 1)
     },
     {
@@ -71,7 +71,7 @@ const initialState = {
       type: 'TASK',
       summary: 'Create some test datasets',
       priority: 'LOW',
-      assignee: 'Alex Figliolia',
+      assignee: '',
       points: Math.floor(Math.random() * (5 - 1) + 1)
     },
     {
@@ -79,7 +79,7 @@ const initialState = {
       type: 'TASK',
       summary: 'Create a data-driven graph',
       priority: 'MEDIUM',
-      assignee: 'Alex Figliolia',
+      assignee: '',
       points: Math.floor(Math.random() * (5 - 1) + 1)
     },
   ],

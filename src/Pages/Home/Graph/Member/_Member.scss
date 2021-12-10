@@ -1,0 +1,21 @@
+@import "Styles/Variables";
+
+.viz-member {
+  width: 100%;
+  @include center;
+  justify-content: space-between;
+  margin: 15px 0;
+  color: $BLACK;
+  & > .viz-name {
+    @include center;
+    & > .viz-color {
+      height: 22.5px;
+      width: 22.5px;
+      margin-right: 10px;
+    }
+  }
+  & > .viz-cap {
+    font-size: 1.1em;
+    font-weight: 600;
+  }
+}

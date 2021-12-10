@@ -1,0 +1,33 @@
+@import "Styles/Variables";
+
+.graph-container {
+  width: 100%;
+  @include center;
+  flex-direction: column;
+  margin-top: 10px;
+  & > svg {
+    filter: drop-shadow(0px 2.5px 5px rgba(#000, 0.2));
+    & .arc > text {
+      pointer-events: none;
+    }
+  }
+  & > .graph-meta {
+    width: 90%;
+    max-width: 400px;
+    font-size: 0.95em;
+    & > h3 {
+      color: $BLACK;
+      font-size: 1.4em;
+      margin-bottom: 0;
+    }
+    & > p {
+      color: lighten($BLACK, 20);
+      margin-top: 0.25em;
+      font-weight: 500;
+    }
+    & > .members {
+      width: 100%;
+      border-top: 2px solid lighten($BLACK, 50);
+    }
+  }
+}

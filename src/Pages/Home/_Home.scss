@@ -1,9 +1,24 @@
 @import "Styles/Variables";
 
-.splice {
+.title {
+  width: calc(100% - 30px);
+  margin: 0 auto;
+  margin-top: 70px;
+  & > h2 {
+    color: $BLACK;
+    margin: 0;
+  }
+  @media #{$mq-670} {
+    margin-top: 80px;
+  }
+  @media #{$mq-890} {
+    width: calc(100% - 40px);
+  }
+}
+
+.slice {
   width: 100%;
   min-height: calc(100vh - 50px);
-  margin-top: 50px;
   display: flex;
   justify-content: flex-start;
   align-items: flex-start;
@@ -11,12 +26,13 @@
   box-sizing: border-box;
   max-width: 2000px;
   margin: auto;
-  margin-top: 50px;
-  @media #{$mq-670} {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans",
+    "Droid Sans", "Helvetica Neue", sans-serif;
+  margin-bottom: 60px;
+  @media #{$mq-890} {
     flex-direction: row;
     flex-wrap: wrap;
     min-height: calc(100vh - 60px);
-    margin-top: 60px;
   }
   & > .viz {
     min-height: 300px;
@@ -26,7 +42,21 @@
     box-shadow: 0px 2.5px 5px rgba(#000, 0.2);
     border-radius: 2.5px;
     border-top: 4px solid $BLUE;
+    padding: 10px;
+    box-sizing: border-box;
     @media #{$mq-670} {
+      padding: 12.5px;
+    }
+    & > h2 {
+      color: $BLACK;
+      margin: 0;
+      font-size: 1em;
+      font-weight: 600;
+      @media #{$mq-670} {
+        font-size: 1.25em;
+      }
+    }
+    @media #{$mq-890} {
       width: calc(50% - 30px);
       margin: 20px 10px 5px 20px;
       &:nth-of-type(even) {
